@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat or Dog Classifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Quantum AI: Species Classifier</h1>
+        
+        <form action="/predict" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" id="fileInput" accept="image/*" required>
+            <label for="fileInput" class="file-label">
+                Select Image
+            </label>
+            <br><br>
+            <button type="submit" class="file-label" style="margin-top: 10px;">
+                Predict Species
+            </button>
+        </form>
+
+        {% if prediction %}
+        <div class="result active">
+            <h2 class="prediction-text">{{ prediction }}</h2>
+            <h3>Confidence: {{ confidence }}</h3>
+            <img src="{{ url_for('static', filename=image_path.split('/')[-2] + '/' + image_path.split('/')[-1]) }}" alt="Uploaded Image">
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
